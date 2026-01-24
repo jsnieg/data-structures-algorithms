@@ -37,10 +37,6 @@ class LinkedList:
         
         return count
     
-
-    def find_at_index(self, index):
-        ...
-
     
     def add(self, data):
         """
@@ -126,6 +122,20 @@ class LinkedList:
         ...
 
 
+    def node_at_index(self, index):
+        if index == 0:
+            return self.head
+        else:
+            current = self.head
+            position = 0
+
+            while position < index:
+                current = current.next_node
+                position += 1
+
+            return current
+
+
     def __repr__(self):
         """
         Returns string representation of the list.
@@ -145,14 +155,14 @@ class LinkedList:
             current = current.next_node
         return "->".join(nodes)
 
-l = LinkedList()    # create linked list type
-l.add(1)
-l.add(2)
-l.add(3)
-l.add(4)
-print(l.size())
-print(l)
-print(l.search(4)) # True as it does exist.
-print(l.search(5)) # False as it does not exist.
+# l = LinkedList()    # create linked list type
+# l.add(1)
+# l.add(2)
+# l.add(3)
+# l.add(4)
+# print(l.size())
+# print(l)
+# print(l.search(4)) # True as it does exist.
+# print(l.search(5)) # False as it does not exist.
 
 # To do as challenge: remove at index and node at index.

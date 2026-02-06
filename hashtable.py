@@ -1,6 +1,8 @@
 class HashTable:
+    
     def __init__(self, size):
         self.data = [None] * size
+
 
     def _hash(self, key) -> int:
         """Private func don't invoke outside of the class."""
@@ -9,7 +11,8 @@ class HashTable:
             hash = (hash + ord(key[idx]) * idx) % len(self.data)
         return hash
 
-    def set(self, key, value):
+
+    def set(self, key, value) -> list:
         address = self._hash(key)
 
         # handle key collisions, if at same address 
@@ -18,6 +21,7 @@ class HashTable:
             self.data[address] = []
         self.data[address].append([key, value])
         return self.data
+
 
     def get(self, key):
         address = self._hash(key)
@@ -28,15 +32,19 @@ class HashTable:
                     return current[i][1]
         return None
 
-    def get_all(self):
-        for i in range(0, len(self.data)):
-            if self.data[i] is not None:
-                print(self.data[i])
 
-hashtable = HashTable(2)
-hashtable.set('hello', 1000)
-hashtable.set('world', 2000)
-# print(hashtable.get())
-print(hashtable.get('hello'))
-# print(hashtable.get('world'))
-# hashtable.get_all()
+    def keys(self) -> list:
+        keys = []
+        for i in range(0, len(self.data)):
+            if (self.data[i] is not None):
+                keys.append(self.data[i][0][0])
+        return keys
+
+
+hashtable = HashTable(50)
+hashtable.set('grapes', 1000)
+hashtable.set('bananas', 2000)
+hashtable.set('pears', 4000)
+hashtable.set('apples', 1500)
+print(hashtable.get('bananas'))
+print(hashtable.keys())

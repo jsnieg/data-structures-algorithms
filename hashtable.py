@@ -34,14 +34,24 @@ class HashTable:
 
 
     def keys(self) -> list:
+        if (len(self.data) == 0):
+            return None
+        
+        # in case of key collision such as:
+        # grapes and bananas are on the same memory address
+        # add all subsequent keys into the arr
         keys = []
         for i in range(0, len(self.data)):
             if (self.data[i] is not None):
-                keys.append(self.data[i][0][0])
+                if (len(self.data) > 1):
+                    for j in range(0, len(self.data[i])):
+                        keys.append(self.data[i][j][0])
+                else:
+                    keys.append(self.data[i][0])
         return keys
 
 
-hashtable = HashTable(50)
+hashtable = HashTable(5)
 hashtable.set('grapes', 1000)
 hashtable.set('bananas', 2000)
 hashtable.set('pears', 4000)
